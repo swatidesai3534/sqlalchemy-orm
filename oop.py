@@ -34,3 +34,5 @@ class Student(Person):
 
 p1=Student("John","Deo")
 p1.printname()
+
+
