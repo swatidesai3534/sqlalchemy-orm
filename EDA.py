@@ -1,15 +1,4 @@
-""" import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-# to ignore warning
-import warnings
-warnings.filterwarnings('ignore') 
-data=pd.read_csv("used_cars_data.csv")
-print(data)
-print(data.head())
-data.info()
-data.nunique()
-print(data.isnull().sum()) """
+
 
 from sqlalchemy import create_engine
 engine=create_engine("mysql+pymysql://root:root@localhost:3306/joget")
@@ -42,7 +31,7 @@ class Address(Base):
     __tablename__="address"
     id=Column(Integer,primary_key=True)
     email_address=Column(String,nullable=False)
-    user_id=Column(Integer,ForeignKey("user_account.id"),nullable=False)
+    user_id=Column(Integer,ForeignKey("users.id"),nullable=False)
 
     user=relationship("User",back_populates="addresses")
 
@@ -66,14 +55,14 @@ for user in session.scalars(stmt):
 stmt=(select(Address).join(Address.user).where(User.name=="sandy").where(Address.email_address=="sandy@sqlalchemy.org"))
 sandy_address=session.scalars(stmt).one()
 
-###make change
-"""stmt=select(User).where(User.name=="patrick")
+#make change#
+stmt=select(User).where(User.name=="patrick")
 patrick=session.scalars(stmt).one()
 sandy_address=Address(id=2,email_address='sandy@sqlalchemy.org')
 patrick.addresses.append(Address(email_address="patrickstar@sqlalchemy.org"))
 sandy_address.email_address="sandy_cheeks@sqlalchemy.org"
-session.commit()"""
-### Some Deletes
+session.commit()
+#Some Deletes#
 sandy=session.get(User,2)
 sandy.addresses.remove(sandy_address)
 session.flush()

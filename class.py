@@ -14,7 +14,7 @@ class User(Base):
     nickname=Column(String(30))
     def __repr__(self):
         return f"User(name={self.name!r},fulname={self.fullname!r},nickname={self.nickname!r})"
-# Create a Schema¶
+""""# Create a Schema¶
 User.__table__
 print(User.__table__)
 from sqlalchemy.orm import sessionmaker
@@ -59,4 +59,4 @@ for instance in session.query(User).order_by(User.id):
     print(instance.name,instance.fullname)
 
 for name,fullname in session.query(User.name,User.fullname):
-    print(name,fullname)
+    print(name,fullname)"""
