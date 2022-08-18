@@ -98,4 +98,5 @@ session.query(Customer).from_statement(text("select * from customers")).all()"""
 from sqlalchemy import text
 stmt=text("select name,id,address,email from customers")
 stmt=stmt.columns(Customer.id,Customer.name)
-print(list(session.query(Customer.id,Customer.name).from_statement(stmt).all()))
+session.query(Customer.id,Customer.name).from_statement(stmt).all()
+# print(session.query(Customer.id,Customer.name).from_statement(stmt).all())
